@@ -70,12 +70,18 @@
   # Enable Tailscale.
   services.tailscale.enable = true;
 
-  # Enable flake support.
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # Configure periodic garbage collection.
-  nix.gc.automatic = true;
-  nix.gc.dates = "03:15";
+  # Configure Nix
+  nix = {
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      auto-optimise-store = true;
+    };
+    gc = {
+      automatic = true;
+      dates = "monthly";
+      options = "--delete-older-than 30d";
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
