@@ -7,7 +7,7 @@ let services = with builtins;
 
 in {
   containers = builtins.listToAttrs
-    (builtins.map ({name, config}: 
+    (builtins.map ({ name, config }: 
       {
         name = name;
         value = {
@@ -17,7 +17,7 @@ in {
             boot.isContainer = true;
             system.stateVersion = state-version;
           };
-        }
+        };
       }
-    ) services)
+    ) services);
 }

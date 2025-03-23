@@ -17,10 +17,10 @@
       modules = [
         nixos-hardware.nixosModules.apple-macbook-pro-11-1
         ./configuration.nix
-        import ./services.nix {
+        (import ./services.nix {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           inherit inputs state-version;
-        }
+        })
       ];
     };
   };
