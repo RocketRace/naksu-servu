@@ -63,9 +63,9 @@
   environment.systemPackages = with pkgs; [
     git
     (pkgs.writeShellScriptBin "update-system" ''
-      cd ~/.config/nix
+      cd /home/olivia/.config/nix
       ${git}/bin/git pull --rebase
-      sudo nixos-rebuild switch --flake ~/.config/nix
+      sudo nixos-rebuild switch --flake .
       cd -
     '')
   ];
