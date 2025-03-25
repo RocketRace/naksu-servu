@@ -62,6 +62,12 @@
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     git
+    (pkgs.writeShellScriptBin "update-system" ''
+      cd ~/.config/nix
+      ${git}/bin/git pull --rebase
+      nixos-rebuild switch --flake ~/.config/nix
+      cd -
+    '')
   ];
 
   # Enable the OpenSSH daemon.
