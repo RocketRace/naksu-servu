@@ -10,7 +10,7 @@
       ./hardware-configuration.nix
     ];
 
-  # Bootloader.
+  # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -18,7 +18,7 @@
   networking.hostName = "caique";
   networking.networkmanager.enable = true;
 
-  # Define a user account.
+  # Define a user account
   users.users.olivia = {
     isNormalUser = true;
     description = "Olivia";
@@ -26,13 +26,7 @@
     packages = with pkgs; [];
   };
 
-  # Automatically log into the user account.
-  services.getty.autologinUser = "olivia";
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile.
+  # System packages
   environment.systemPackages = with pkgs; [
     git
     (pkgs.writeShellScriptBin "update-system" ''
@@ -43,13 +37,13 @@
     '')
   ];
 
-  # Enable the OpenSSH daemon.
+  # Remote access configuration
   services.openssh.enable = true;
-
-  # Enable Tailscale.
   services.tailscale.enable = true;
+  services.logind.lidSwitch = "ignore"; # So I can keep the lid closed
 
-  # Configure Nix
+  # Configure nix & nixpkgs
+  nixpkgs.config.allowUnfree = true;
   nix = {
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
@@ -61,9 +55,6 @@
       options = "--delete-older-than 30d";
     };
   };
-
-  # Let me keep the lid closed
-  services.logind.lidSwitch = "ignore";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
