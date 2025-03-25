@@ -2,6 +2,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    oliviabot.url = "github:RocketRace/oliviabot";
+    oliviabot.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs@{

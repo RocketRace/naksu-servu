@@ -3,8 +3,7 @@
 {
   systemd.services."oliviabot" = {
     # Test service
-    path = [ pkgs.coreutils ];
-    script = "${pkgs.coreutils}/bin/echo hi!";
+    script = "${inputs.oliviabot}/bin/prod";
     # Start automatically on boot after we have network access
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
