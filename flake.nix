@@ -19,7 +19,7 @@
         ./configuration.nix
         (import ./services.nix {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          inherit inputs state-version;
+          inherit inputs;
         })
       ];
     };
