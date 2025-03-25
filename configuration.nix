@@ -65,7 +65,7 @@
     (pkgs.writeShellScriptBin "update-system" ''
       cd ~/.config/nix
       ${git}/bin/git pull --rebase
-      nixos-rebuild switch --flake ~/.config/nix
+      sudo nixos-rebuild switch --flake ~/.config/nix
       cd -
     '')
   ];
