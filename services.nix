@@ -9,9 +9,9 @@
       cd /home/olivia/services
       if [ -d oliviabot ]; then
         cd oliviabot
-        git pull --rebase
+        ${pkgs.git}/bin/git pull --rebase
       else
-        git clone git@github.com:RocketRace/oliviabot.git
+        ${pkgs.git}/bin/git clone git@github.com:RocketRace/oliviabot.git
       fi
     '';
     script = ''
