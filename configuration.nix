@@ -26,6 +26,9 @@
     packages = with pkgs; [];
   };
 
+  # If you can log in without my knowledge then the sudo password probably isn't stopping you
+  security.sudo.wheelNeedsPassword = false;
+
   # System packages
   environment.systemPackages = with pkgs; [
     git
