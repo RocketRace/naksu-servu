@@ -5,7 +5,7 @@
     # Start automatically on boot after we have network access
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
-    path = [ pkgs.openssh, pkgs.git, pkgs.nix ];
+    path = [ pkgs.openssh pkgs.git pkgs.nix ];
     preStart = ''
       cd /home/olivia/services
       if [ -d oliviabot ]; then
