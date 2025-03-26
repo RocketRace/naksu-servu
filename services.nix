@@ -21,4 +21,13 @@
       nix run
     '';
   };
+
+  # Remote update script
+  environment.systemPackages = with pkgs; [
+    (pkgs.writeShellScriptBin "update-oliviabot" ''
+      cd /home/olivia/services
+      ${git}/bin/git pull --rebase
+      sudo systemctl restart oliviabot
+    '')
+  ];
 }
