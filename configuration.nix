@@ -29,7 +29,6 @@
   # System packages
   environment.systemPackages = with pkgs; [
     git
-    openssh
     (pkgs.writeShellScriptBin "update-system" ''
       cd /home/olivia/.config/nix
       ${git}/bin/git pull --rebase

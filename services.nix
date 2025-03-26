@@ -11,7 +11,7 @@
         cd oliviabot
         ${pkgs.git}/bin/git pull --rebase
       else
-        ${pkgs.git}/bin/git clone git@github.com:RocketRace/oliviabot.git
+        ${pkgs.git}/bin/git clone https://github.com/RocketRace/oliviabot.git
       fi
     '';
     script = ''
