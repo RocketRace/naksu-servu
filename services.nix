@@ -6,6 +6,7 @@
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
     path = [ pkgs.openssh pkgs.git pkgs.nix ];
+    # Additional setup: scp oliviabot.db, config.py and discord.log into /home and move it to the appropriate folder 
     preStart = ''
       cd /home/olivia/services
       if [ -d oliviabot ]; then
