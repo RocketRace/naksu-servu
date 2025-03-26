@@ -15,23 +15,23 @@ let we-have-derivations-at-home = {
     # Git is used to set up
     path = path ++ [ pkgs.git ];
     preStart = ''
-      cd ${base}
+      cd "${base}"
       if [ -d ${name} ]; then
         cd ${name}
         git pull --rebase
       else
-        git clone ${git-url}
+        git clone "${git-url}"
       fi
     '';
     script = ''
-      cd ${base}/${name}
+      cd "${base}/${name}"
       ${script}
     '';
   };
 
   # Remote update script
   updater = pkgs.writeShellScriptBin "update-${name}" ''
-    cd ${base}/${name}
+    cd "${base}/${name}"
     sudo ${pkgs.git}/bin/git pull --rebase
     sudo systemctl restart ${name}
   '';
