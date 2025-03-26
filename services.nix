@@ -13,7 +13,7 @@
         cd oliviabot
         git pull --rebase
       else
-        git clone https://github.com:RocketRace/oliviabot.git
+        git clone https://github.com/RocketRace/oliviabot.git
       fi
     '';
     script = ''
