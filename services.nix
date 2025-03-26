@@ -47,6 +47,7 @@ services = [
     name = "oliviabot";
     git-url = "https://github.com/RocketRace/oliviabot.git";
     script = "nix run";
+    path = [ pkgs.nix ];
     # Additional setup: scp oliviabot.db, config.py and discord.log into /home and move it to the appropriate folder 
   }
 ];
