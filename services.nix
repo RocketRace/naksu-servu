@@ -1,33 +1,54 @@
 { pkgs, inputs, ... }:
 
-{
-  systemd.services."oliviabot" = {
-    # Start automatically on boot after we have network access
+let we-have-derivations-at-home = {
+  name,
+  git-url,
+  script,
+  base ? "/home/olivia/services",
+  path ? [],
+}: {
+  name = name;
+  service = {
+    # Start automatically at the appropriate time
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
-    path = [ pkgs.git pkgs.nix ];
-    # Additional setup: scp oliviabot.db, config.py and discord.log into /home and move it to the appropriate folder 
+    # Git is used to set up
+    path = path ++ [ pkgs.git ];
     preStart = ''
-      cd /home/olivia/services
-      if [ -d oliviabot ]; then
-        cd oliviabot
+      cd ${base}
+      if [ -d ${name} ]; then
+        cd ${name}
         git pull --rebase
       else
-        git clone https://github.com/RocketRace/oliviabot.git
+        git clone ${git-url}
       fi
     '';
     script = ''
-      cd /home/olivia/services/oliviabot
-      nix run
+      cd ${base}/${name}
+      ${script}
     '';
   };
 
   # Remote update script
-  environment.systemPackages = with pkgs; [
-    (pkgs.writeShellScriptBin "update-oliviabot" ''
-      cd /home/olivia/services/oliviabot
-      sudo ${git}/bin/git pull --rebase
-      sudo systemctl restart oliviabot
-    '')
-  ];
-}
+  updater = pkgs.writeShellScriptBin "update-${name}" ''
+    cd ${base}/${name}
+    sudo ${pkgs.git}/bin/git pull --rebase
+    sudo systemctl restart ${name}
+  '';
+};
+
+merge = sets: {
+  systemd.services = builtins.listToAttrs (builtins.map (s: { name = s.name; value = s.service; }) sets);
+  environment.systemPackages = builtins.map (s: s.updater) sets;
+};
+
+services = [
+  {
+    name = "oliviabot";
+    git-url = "https://github.com/RocketRace/oliviabot.git";
+    script = "nix run";
+    # Additional setup: scp oliviabot.db, config.py and discord.log into /home and move it to the appropriate folder 
+  }
+];
+
+in (merge (builtins.map we-have-derivations-at-home services))
