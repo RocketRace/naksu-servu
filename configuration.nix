@@ -32,6 +32,7 @@
   # System packages
   environment.systemPackages = with pkgs; [
     git
+    lm_sensors
     (pkgs.writeShellScriptBin "update-system" ''
       cd /home/olivia/.config/nix
       ${git}/bin/git pull --rebase
