@@ -45,10 +45,18 @@
   services.openssh.enable = true;
   services.tailscale.enable = true;
   # Seems like everything goes through tailscale otherwise?
+  networking.nameservers = [
+    "1.1.1.1"
+    "1.0.0.1"
+  ];
   services.resolved = {
     enable = true;
     dnssec = "true";
     dnsovertls = "true";
+    fallbackDns = [
+      "1.1.1.1"
+      "1.0.0.1"
+    ];
   };
   
   # So I can keep the lid closed
