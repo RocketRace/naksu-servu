@@ -44,8 +44,15 @@
   # Remote access configuration
   services.openssh.enable = true;
   services.tailscale.enable = true;
-  networking.nameservers = [ "192.168.1.1" ]; # tailscale fucks it up
-  services.logind.lidSwitch = "ignore"; # So I can keep the lid closed
+  # Seems like everything goes through tailscale otherwise?
+  services.resolved = {
+    enable = true;
+    dnssec = "true";
+    dnsovertls = "true";
+  };
+  
+  # So I can keep the lid closed
+  services.logind.lidSwitch = "ignore";
 
   # Configure nix & nixpkgs
   nixpkgs.config.allowUnfree = true;
