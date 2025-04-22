@@ -13,6 +13,8 @@
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  # Avoid running out of space in /boot
+  boot.loader.systemd-boot.configurationLimit = 5;
 
   # Enable networking
   networking.hostName = "caique";
