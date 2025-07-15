@@ -6,6 +6,7 @@ let we-have-derivations-at-home = {
   script,
   base ? "/home/olivia/services",
   path ? [],
+  environment ? {},
 }: {
   name = name;
   service = {
@@ -27,6 +28,7 @@ let we-have-derivations-at-home = {
       cd "${base}/${name}"
       ${script}
     '';
+    environment = environment;
   };
 
   # Remote update script
@@ -48,6 +50,10 @@ services = [
     git-url = "https://github.com/RocketRace/oliviabot.git";
     script = "nix run";
     path = [ pkgs.nix ];
+    environment = {
+      # the jishaku cog defaults to using /bin/bash which doesn't exist on nixos
+      SHELL = "/bin/sh";
+    };
     # Additional setup: scp oliviabot.db, config.py and discord.log into /home and move it to the appropriate folder 
   }
 ];
