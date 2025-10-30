@@ -60,11 +60,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1752048960,
-        "narHash": "sha256-gATnkOe37eeVwKKYCsL+OnS2gU4MmLuZFzzWCtaKLI8=",
+        "lastModified": 1761827175,
+        "narHash": "sha256-XdPVSYyIBK4/ruoqujaQmmSGg3J2/EenexV9IEXhr6o=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "7ced9122cff2163c6a0212b8d1ec8c33a1660806",
+        "rev": "43ffe9ac82567512abb83187cb673de1091bdfa8",
         "type": "github"
       },
       "original": {
@@ -115,11 +115,11 @@
         "poetry2nix": "poetry2nix"
       },
       "locked": {
-        "lastModified": 1752564675,
-        "narHash": "sha256-wSqz03iRB/pYl8rxI4xvKNxlWyZo0Gm24NRBCp3y0z8=",
+        "lastModified": 1752750547,
+        "narHash": "sha256-gfAubTkjKCQUMyLs0E67pNV2SOndAaX0mnXtS7PhDm0=",
         "owner": "RocketRace",
         "repo": "oliviabot",
-        "rev": "394d3bb43cb6e0390964dcecdc511d408aaf43ab",
+        "rev": "73f5ad002749432004e066d99de063d121cfedfa",
         "type": "github"
       },
       "original": {
